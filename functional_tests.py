@@ -32,13 +32,14 @@ class NewVisitorTest(unittest.TestCase):
         inputbox.send_keys('Buy peacock feathers')
 
         #hits enter. the page updates and now the page lists "1:......"
-        inputbox.send_keys(Key.ENTER)
+        inputbox.send_keys(Keys.ENTER)
         time.sleep(1)
 
-        table = self.brower.find_element_by_id('id_list_table')
-        rows = table.fin_element_by_tag_name('tr')
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
         self.assertTrue(
-            any(row.text == '1:Buy peacock feathers' for row in rows)
+            any(row.text == '1:Buy peacock feathers' for row in rows),
+            "New to-do item did not appear in table"
         )      
 
         #无论如何都会失败，产生错误信息
